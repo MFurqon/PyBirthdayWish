@@ -4,10 +4,16 @@ import os,random
 from threading import Thread
 from time import sleep
 
+# os.add_dll_directory(r'C:\Program Files\VideoLAN\VLC')
+
 import vlc
 from termcolor import colored
 
 from config import *
+
+os.add_dll_directory(r'C:\Program Files\VideoLAN\VLC')
+
+import vlc
 
 # Importing module specified in the config file
 art = __import__(f'arts.{artFile}', globals(), locals(), ['*'])
@@ -62,10 +68,10 @@ def pprint(art,time):
                 
         print(colored(replaceMultiple(art[i],colorCodes,''),random.choice(color_used),attrs=colorAttribute),sep='', end='',flush= True);sleep(time)
 
-def pAudio():
-    if playAudio:
-        p = vlc.MediaPlayer(resource_path(audio))
-        p.play()
+# def pAudio():
+#     if playAudio:
+#         p = vlc.MediaPlayer(resource_path(audio))
+#         p.play()
 
 # Code reader
 with open(resource_path(__file__)) as f_in:
@@ -87,7 +93,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 
 try:
     pcode()
-    Thread(target = pAudio).start()
+    # Thread(target = pAudio).start()
     Thread(target = pprint, args=(art.mainArt,speed)).start()
     input()
 
